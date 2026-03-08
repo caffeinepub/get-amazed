@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Bricolage Grotesque (Display) ── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Outfit (Body) ── */
+@font-face {
+  font-family: "Outfit";
+  src: url("/assets/fonts/Outfit[wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* ── Get Amazed Design Tokens ── */
+    /* Dark mode only — immersive Gen Z aesthetic */
+    --radius: 1rem;
+
+    /* Deep space background */
+    --background: 0.1 0.015 265;
+    --foreground: 0.97 0.01 90;
+
+    /* Card: glassy dark panel */
+    --card: 0.15 0.02 265;
+    --card-foreground: 0.95 0.01 90;
+
+    --popover: 0.18 0.02 265;
+    --popover-foreground: 0.95 0.01 90;
+
+    /* Electric lime primary */
+    --primary: 0.88 0.26 130;
+    --primary-foreground: 0.1 0.015 265;
+
+    /* Soft coral secondary */
+    --secondary: 0.22 0.025 265;
+    --secondary-foreground: 0.9 0.01 90;
+
+    --muted: 0.2 0.02 265;
+    --muted-foreground: 0.55 0.02 265;
+
+    /* Electric lime accent */
+    --accent: 0.88 0.26 130;
+    --accent-foreground: 0.1 0.015 265;
+
+    --destructive: 0.65 0.22 27;
+    --destructive-foreground: 0.97 0.01 90;
+
+    --border: 0.28 0.03 265;
+    --input: 0.22 0.025 265;
+    --ring: 0.88 0.26 130;
+
+    /* Category badge colors */
+    --cat-science: 0.72 0.21 240;       /* Electric blue */
+    --cat-history: 0.75 0.16 55;        /* Warm amber */
+    --cat-nature: 0.75 0.22 145;        /* Fresh green */
+    --cat-mind: 0.72 0.22 310;          /* Vivid purple */
+    --cat-all: 0.65 0.02 265;           /* Neutral */
+
+    /* Glows */
+    --glow-primary: oklch(0.88 0.26 130 / 0.35);
+    --glow-coral: oklch(0.72 0.18 30 / 0.28);
+
+    --chart-1: 0.88 0.26 130;
+    --chart-2: 0.72 0.18 30;
+    --chart-3: 0.72 0.21 240;
+    --chart-4: 0.72 0.22 310;
+    --chart-5: 0.75 0.16 55;
+
+    --sidebar: 0.14 0.02 265;
+    --sidebar-foreground: 0.95 0.01 90;
+    --sidebar-primary: 0.88 0.26 130;
+    --sidebar-primary-foreground: 0.1 0.015 265;
+    --sidebar-accent: 0.2 0.025 265;
+    --sidebar-accent-foreground: 0.95 0.01 90;
+    --sidebar-border: 0.28 0.03 265;
+    --sidebar-ring: 0.88 0.26 130;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Outfit", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── Utility classes ── */
+@layer utilities {
+  .font-display {
+    font-family: "Bricolage Grotesque", sans-serif;
+  }
+
+  .glow-lime {
+    box-shadow: 0 0 40px var(--glow-primary), 0 0 80px oklch(0.88 0.26 130 / 0.15);
+  }
+
+  .glow-lime-sm {
+    box-shadow: 0 0 20px var(--glow-primary);
+  }
+
+  .text-glow-lime {
+    text-shadow: 0 0 30px oklch(0.88 0.26 130 / 0.7);
+  }
+
+  .glass-card {
+    background: oklch(0.15 0.02 265 / 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid oklch(0.35 0.04 265 / 0.6);
+  }
+
+  .noise-bg {
+    position: relative;
+  }
+
+  .noise-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Category pill active states */
+  .cat-pill-all[data-active="true"] {
+    background: oklch(var(--cat-all) / 0.25);
+    border-color: oklch(var(--cat-all));
+    color: oklch(0.9 0.02 265);
+  }
+  .cat-pill-science[data-active="true"] {
+    background: oklch(var(--cat-science) / 0.2);
+    border-color: oklch(var(--cat-science));
+    color: oklch(var(--cat-science));
+  }
+  .cat-pill-history[data-active="true"] {
+    background: oklch(var(--cat-history) / 0.2);
+    border-color: oklch(var(--cat-history));
+    color: oklch(var(--cat-history));
+  }
+  .cat-pill-nature[data-active="true"] {
+    background: oklch(var(--cat-nature) / 0.2);
+    border-color: oklch(var(--cat-nature));
+    color: oklch(var(--cat-nature));
+  }
+  .cat-pill-mind[data-active="true"] {
+    background: oklch(var(--cat-mind) / 0.2);
+    border-color: oklch(var(--cat-mind));
+    color: oklch(var(--cat-mind));
+  }
+}
